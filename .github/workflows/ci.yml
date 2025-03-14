@@ -28,3 +28,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: List installed .NET SDKs
+        run: dotnet --list-sdks
+
+      - name: Restore project dependencies
+        working-directory: ./csharp/SdetBootcampDay1
+        run: dotnet restore -p:TargetFramework=${{ matrix.framework }}
+
+      - name: Build the project
+        working-directory: ./csharp/SdetBootcampDay1
+        run: dotnet build --framework ${{ matrix.framework }} --no-restore
+
+      - name: Run tests from day 1
+        working-directory: ./csharp/SdetBootcampDay1
+        run: dotnet test --framework ${{ matrix.framework }} --no-restore --no-build --verbosity normal --filter Name~Exercises
