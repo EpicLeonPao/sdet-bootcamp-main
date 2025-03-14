@@ -50,7 +50,7 @@ namespace SdetBootcampDay1.Exercises
             {
                 oh.AddStock(OrderItem.DayOfTheTentacle, 1);
             });
-            Assert.That(exp.Message, Is.EqualTo("Unknown itemDayOfTheTentacle"));
+            Assert.That(exp.Message, Is.EqualTo("Unknown item DayOfTheTentacle"));
          }
 
 
